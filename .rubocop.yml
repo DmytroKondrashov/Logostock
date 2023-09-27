@@ -1,0 +1,355 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 2.7.3
+  NewCops: enable
+  Exclude:
+    - "bin/*"
+    - "db/migrate/*.rb"
+    - "db/schema.rb"
+    - "log/**/*"
+    - "node_modules/**/*"
+    - "public/**/*"
+    - "tmp/**/*"
+    - "vendor/**/*"
+Layout/BeginEndAlignment:
+  Enabled: true
+Layout/DotPosition:
+  EnforcedStyle: trailing
+Layout/EmptyLineAfterGuardClause:
+  Enabled: true
+Layout/EmptyLineAfterMultilineCondition:
+  Enabled: false
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+Layout/EmptyLinesAroundExceptionHandlingKeywords:
+  Enabled: false
+Layout/EndAlignment:
+  EnforcedStyleAlignWith: start_of_line
+Layout/ExtraSpacing:
+  Enabled: false
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+Layout/HashAlignment:
+  Enabled: false
+Layout/LineLength:
+  Enabled: false
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: indented
+Layout/RescueEnsureAlignment:
+  Enabled: false
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: compact
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - "spec/**/*"
+Lint/BinaryOperatorWithIdenticalOperands:
+  Enabled: true
+Lint/ConstantDefinitionInBlock:
+  Enabled: true
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+Lint/DuplicateBranch:
+  Exclude:
+    - "app/services/process_csv/*"
+    - "app/graphql/mutations/create_slide.rb"
+Lint/DuplicateElsifCondition:
+  Enabled: true
+Lint/DuplicateRescueException:
+  Enabled: true
+Lint/DuplicateRequire:
+  Enabled: true
+Lint/EmptyClass:
+  Enabled: false
+Lint/EmptyConditionalBody:
+  Enabled: true
+Lint/EmptyFile:
+  Enabled: true
+Lint/FloatComparison:
+  Enabled: true
+Lint/HashCompareByIdentity:
+  Enabled: true
+Lint/IdentityComparison:
+  Enabled: true
+Lint/MissingSuper:
+  Enabled: false
+Lint/MixedRegexpCaptureTypes:
+  Enabled: true
+Lint/NoReturnInBeginEndBlocks:
+  Enabled: true
+Lint/OutOfRangeRegexpRef:
+  Enabled: true
+Lint/RaiseException:
+  Enabled: true
+Lint/RedundantSafeNavigation:
+  Enabled: true
+Lint/ShadowedException:
+  Enabled: false
+Lint/SelfAssignment:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
+Lint/SuppressedException:
+  Enabled: false
+Lint/ToEnumArguments:
+  Enabled: false
+Lint/TopLevelReturnWithArgument:
+  Enabled: true
+Lint/TrailingCommaInAttributeDeclaration:
+  Enabled: true
+Lint/UnreachableLoop:
+  Enabled: true
+Lint/UselessMethodDefinition:
+  Enabled: false
+Lint/UselessTimes:
+  Enabled: true
+Metrics/AbcSize:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false
+Metrics/BlockNesting:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/ModuleLength:
+  Enabled: false
+Metrics/ParameterLists:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+Naming/FileName:
+  Exclude:
+    - "Gemfile"
+Naming/PredicateName:
+  Enabled: false
+Naming/RescuedExceptionsVariableName:
+  PreferredName: "err"
+Naming/VariableNumber:
+  Enabled: false
+Performance/FixedSize:
+  Enabled: false
+Rails:
+  Enabled: true
+Rails/ActionOrder:
+  Enabled: false
+Rails/ActiveRecordCallbacksOrder:
+  Enabled: true
+Rails/AfterCommitOverride:
+  Enabled: true
+Rails/HasAndBelongsToMany:
+  Enabled: false
+Rails/Delegate:
+  Enabled: false
+Rails/FilePath:
+  EnforcedStyle: arguments
+Rails/FindBy:
+  Enabled: false
+Rails/FindById:
+  Enabled: true
+Rails/FindEach:
+  Enabled: false
+Rails/HelperInstanceVariable:
+  Enabled: false
+Rails/Inquiry:
+  Enabled: true
+Rails/InverseOf:
+  Enabled: true
+Rails/MailerName:
+  Enabled: true
+Rails/MatchRoute:
+  Enabled: true
+Rails/NegateInclude:
+  Enabled: true
+Rails/OrderById:
+  Enabled: false
+Rails/OutputSafety:
+  Enabled: false
+Rails/Pluck:
+  Enabled: true
+Rails/PluckId:
+  Enabled: false
+Rails/PluckInWhere:
+  Enabled: true
+Rails/RenderInline:
+  Enabled: true
+Rails/RenderPlainText:
+  Enabled: true
+Rails/ShortI18n:
+  Enabled: true
+Rails/SkipsModelValidations:
+  Enabled: true
+  Exclude:
+    - "spec/**/*"
+    - "app/services/companies/association_tracking.rb"
+Rails/SquishedSQLHeredocs:
+  Enabled: true
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - test
+Rails/WhereExists:
+  Enabled: true
+Rails/WhereNot:
+  Enabled: false
+RSpec/BeEql:
+  Enabled: false
+RSpec/ContextWording:
+  Enabled: false
+RSpec/EmptyLineAfterFinalLet:
+  Enabled: false
+RSpec/EmptyLineAfterHook:
+  Enabled: false
+RSpec/FactoryBot/AttributeDefinedStatically:
+  Enabled: true
+RSpec/FactoryBot/ConsistentParenthesesStyle:
+  Enabled: false
+RSpec/FilePath:
+  Enabled: false
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+RSpec/Rails/InferredSpecType:
+  Enabled: false
+RSpec/RepeatedExampleGroupBody:
+  Enabled: false
+RSpec/RepeatedDescription:
+  Enabled: true
+RSpec/LetSetup:
+  Enabled: false
+RSpec/NestedGroups:
+  Enabled: false
+Security/Open:
+  Enabled: false
+Style/AccessorGrouping:
+  Enabled: false
+Style/ArrayCoercion:
+  Enabled: true
+Style/Attr:
+  Enabled: true
+Style/BisectedAttrAccessor:
+  Enabled: true
+Style/BlockDelimiters:
+  Enabled: false
+Style/CaseLikeIf:
+  Enabled: true
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/ClassEqualityComparison:
+  Enabled: true
+Style/ClassMethodsDefinitions:
+  Enabled: false
+Style/CombinableLoops:
+  Enabled: false
+Style/ConditionalAssignment:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/DoubleNegation:
+  Enabled: false
+Style/EmptyMethod:
+  Enabled: false
+Style/ExplicitBlockArgument:
+  Enabled: false
+Style/ExponentialNotation:
+  Enabled: false
+Style/FetchEnvVar:
+  Enabled: false
+Style/FormatStringToken:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/GlobalStdStream:
+  Enabled: true
+Style/GuardClause:
+  Enabled: false
+Style/HashAsLastArrayItem:
+  Enabled: false
+Style/HashEachMethods:
+  Enabled: true
+Style/OpenStructUse:
+  Enabled: false
+Style/HashLikeCase:
+  Enabled: false
+Style/HashSyntax:
+  EnforcedStyle: ruby19
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
+Style/IfInsideElse:
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
+Style/KeywordParametersOrder:
+  Enabled: false
+Style/Lambda:
+  Enabled: false
+Style/MixinUsage:
+  Enabled: true
+  Exclude:
+    - "db/seeds.rb"
+Style/MultilineTernaryOperator:
+  Enabled: false
+Style/NonNilCheck:
+  Enabled: false
+Style/NumericLiterals:
+  Enabled: false
+Style/NumericPredicate:
+  Enabled: false
+Style/OptionalBooleanParameter:
+  Enabled: false
+Style/OptionHash:
+  Enabled: true
+Style/PercentLiteralDelimiters:
+  Enabled: false
+Style/RedundantArgument:
+  Enabled: false
+Style/RedundantAssignment:
+  Enabled: true
+Style/RedundantFetchBlock:
+  Enabled: true
+Style/RedundantFileExtensionInRequire:
+  Enabled: true
+Style/RedundantRegexpCharacterClass:
+  Enabled: true
+Style/RedundantRegexpEscape:
+  Enabled: true
+Style/RedundantSelfAssignment:
+  Enabled: true
+Style/RescueModifier:
+  Enabled: false
+Style/RescueStandardError:
+  Enabled: false
+Style/SingleArgumentDig:
+  Enabled: true
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/SlicingWithRange:
+  Enabled: true
+Style/SoleNestedConditional:
+  Enabled: false
+Style/StringConcatenation:
+  Enabled: true
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
