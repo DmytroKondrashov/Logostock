@@ -3,6 +3,10 @@ Rails.application.routes.draw do
     root to: "companies#index"
     
     resources :companies
+    resources :practices
+    resources :asset_classes
+    resources :job_functions
+    resources :locations
     resources :users
   end
 
