@@ -4,8 +4,6 @@ Rails.application.routes.draw do
     
     resources :companies
     resources :users
-
-    # root to: "users#index"
   end
 
   devise_for :users
