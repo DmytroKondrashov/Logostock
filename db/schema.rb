@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_28_100845) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_28_101059) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -63,6 +63,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_28_100845) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "companies_job_functions", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "job_function_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_companies_job_functions_on_company_id"
+    t.index ["job_function_id"], name: "index_companies_job_functions_on_job_function_id"
+  end
+
   create_table "companies_practices", force: :cascade do |t|
     t.bigint "company_id", null: false
     t.bigint "practice_id", null: false
@@ -106,6 +115,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_28_100845) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "asset_classes_companies", "asset_classes"
   add_foreign_key "asset_classes_companies", "companies"
+  add_foreign_key "companies_job_functions", "companies"
+  add_foreign_key "companies_job_functions", "job_functions"
   add_foreign_key "companies_practices", "companies"
   add_foreign_key "companies_practices", "practices"
 end
