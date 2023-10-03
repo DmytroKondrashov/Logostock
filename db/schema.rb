@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_03_164644) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_03_164903) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_03_164644) do
     t.bigint "asset_class_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["asset_class_id", "company_id"], name: "index_asset_classes_companies_on_asset_class_id_and_company_id", unique: true
     t.index ["asset_class_id"], name: "index_asset_classes_companies_on_asset_class_id"
     t.index ["company_id"], name: "index_asset_classes_companies_on_company_id"
   end
@@ -46,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_03_164644) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_companies_job_functions_on_company_id"
+    t.index ["job_function_id", "company_id"], name: "index_companies_job_functions_on_job_function_id_and_company_id", unique: true
     t.index ["job_function_id"], name: "index_companies_job_functions_on_job_function_id"
   end
 
@@ -55,6 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_03_164644) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_companies_locations_on_company_id"
+    t.index ["location_id", "company_id"], name: "index_companies_locations_on_location_id_and_company_id", unique: true
     t.index ["location_id"], name: "index_companies_locations_on_location_id"
   end
 
@@ -64,6 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_03_164644) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_companies_practices_on_company_id"
+    t.index ["practice_id", "company_id"], name: "index_companies_practices_on_practice_id_and_company_id", unique: true
     t.index ["practice_id"], name: "index_companies_practices_on_practice_id"
   end
 
