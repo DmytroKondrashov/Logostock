@@ -10,14 +10,111 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_27_180854) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_28_142234) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_trgm"
   enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "asset_classes", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_asset_classes_on_deleted_at"
+  end
+
+  create_table "asset_classes_companies", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "asset_class_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_class_id"], name: "index_asset_classes_companies_on_asset_class_id"
+    t.index ["company_id"], name: "index_asset_classes_companies_on_company_id"
+  end
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "companies_job_functions", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "job_function_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_companies_job_functions_on_company_id"
+    t.index ["job_function_id"], name: "index_companies_job_functions_on_job_function_id"
+  end
+
+  create_table "companies_locations", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "location_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_companies_locations_on_company_id"
+    t.index ["location_id"], name: "index_companies_locations_on_location_id"
+  end
+
+  create_table "companies_practices", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "practice_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_companies_practices_on_company_id"
+    t.index ["practice_id"], name: "index_companies_practices_on_practice_id"
+  end
+
+  create_table "job_functions", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_job_functions_on_deleted_at"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_locations_on_deleted_at"
+  end
+
+  create_table "practices", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_practices_on_deleted_at"
   end
 
   create_table "users", force: :cascade do |t|
@@ -32,4 +129,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_180854) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "asset_classes_companies", "asset_classes"
+  add_foreign_key "asset_classes_companies", "companies"
+  add_foreign_key "companies_job_functions", "companies"
+  add_foreign_key "companies_job_functions", "job_functions"
+  add_foreign_key "companies_locations", "companies"
+  add_foreign_key "companies_locations", "locations"
+  add_foreign_key "companies_practices", "companies"
+  add_foreign_key "companies_practices", "practices"
 end
