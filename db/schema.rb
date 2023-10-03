@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_03_163958) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_03_164113) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -94,6 +94,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_03_163958) do
     t.index ["practice_id"], name: "index_companies_practices_on_practice_id"
   end
 
+  create_table "csv_uploads", force: :cascade do |t|
+    t.string "csv_filename", null: false
+    t.jsonb "csv_content", null: false
+    t.jsonb "companies_applied"
+    t.jsonb "companies_failed"
+    t.jsonb "companies_discarded"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_csv_uploads_on_user_id"
+  end
+
   create_table "job_functions", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -143,4 +155,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_03_163958) do
   add_foreign_key "companies_locations", "locations"
   add_foreign_key "companies_practices", "companies"
   add_foreign_key "companies_practices", "practices"
+  add_foreign_key "csv_uploads", "users"
 end
