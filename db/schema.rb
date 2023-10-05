@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_05_111210) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_05_113503) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -32,6 +32,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_111210) do
     t.index ["asset_class_id", "company_id"], name: "index_asset_classes_companies_on_asset_class_id_and_company_id", unique: true
     t.index ["asset_class_id"], name: "index_asset_classes_companies_on_asset_class_id"
     t.index ["company_id"], name: "index_asset_classes_companies_on_company_id"
+  end
+
+  create_table "clients", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "provider", default: "", null: false
+    t.string "uid", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["provider", "email"], name: "index_clients_on_provider_and_email", unique: true
+    t.index ["provider", "uid"], name: "index_clients_on_provider_and_uid", unique: true
   end
 
   create_table "companies", force: :cascade do |t|
