@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_05_110628) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_05_111210) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -74,9 +74,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_110628) do
   create_table "csv_uploads", force: :cascade do |t|
     t.string "csv_filename", null: false
     t.text "csv_content", null: false
-    t.jsonb "companies_applied"
-    t.jsonb "companies_failed"
-    t.jsonb "companies_discarded"
+    t.jsonb "companies_applied", default: "{}", null: false
+    t.jsonb "companies_failed", default: "{}", null: false
+    t.jsonb "companies_discarded", default: "{}", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
