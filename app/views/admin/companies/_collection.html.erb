@@ -4,17 +4,21 @@
       <% collection_presenter.attribute_types.each do |attr_name, attr_type| %>
         <th class="cell-label
         cell-label--<%= attr_type.html_class %>
-        cell-label--<%= collection_presenter.ordered_html_class(attr_name) %>
-        cell-label--<%= "#{collection_presenter.resource_name}_#{attr_name}" %>"
+        cell-label--<%= collection_presenter.ordered_html_class(attr_name) %>"
         scope="col"
+        role="columnheader"
         aria-sort="<%= sort_order(collection_presenter.ordered_html_class(attr_name)) %>">
-        <%= link_to(sanitized_order_params(page, collection_field_name).merge(
-          collection_presenter.order_params_for(attr_name, key: collection_field_name)
-        )) do %>
-        <%= t(
-          "helpers.label.#{collection_presenter.resource_name}.#{attr_name}",
-          default: resource_class.human_attribute_name(attr_name).titleize,
-        ) %>
+
+        <% if ["Practices", "Asset classes", "Job functions", "Locations"].include?(resource_class.human_attribute_name(attr_name))%>
+          <span> <%= resource_class.human_attribute_name(attr_name) %> </span>
+        <% else %>
+          <%= link_to(sanitized_order_params(page, collection_field_name).merge(
+            collection_presenter.order_params_for(attr_name, key: collection_field_name).merge(@params.to_h)
+          )) do %>
+          <%= t(
+            "helpers.label.#{collection_presenter.resource_name}.#{attr_name}",
+            default: resource_class.human_attribute_name(attr_name),
+          ).titleize %>
             <% if collection_presenter.ordered_by?(attr_name) %>
               <span class="cell-label__sort-indicator cell-label__sort-indicator--<%= collection_presenter.ordered_html_class(attr_name) %>">
                 <svg aria-hidden="true">
@@ -23,32 +27,25 @@
               </span>
             <% end %>
           <% end %>
+        <% end %>
+
         </th>
       <% end %>
-      <%= render(
-        "collection_header_actions",
-        collection_presenter: collection_presenter,
-        page: page,
-        resources: resources,
-        table_title: "page-title"
-      ) %>
+      <th scope="col" class="test"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% resources.each do |resource| %>
+    <% resources.where(is_request: false).each do |resource| %>
       <tr class="js-table-row"
-          <% if accessible_action?(resource, :show) %>
-            <%= %(tabindex=0 role=link data-url=#{polymorphic_path([namespace, resource])}) %>
-          <% end %>
-          >
+        <% if show_action? :show, resource %>
+          <%= %(tabindex=0 role=link data-url=#{polymorphic_path([namespace, resource])}) %>
+        <% end %>
+        >
         <% collection_presenter.attributes_for(resource).each do |attribute| %>
           <td class="cell-data cell-data--<%= attribute.html_class %>">
-            <% if accessible_action?(resource, :show) -%>
-              <a href="<%= polymorphic_path([namespace, resource]) -%>"
-                 tabindex="-1"
-                 class="action-show"
-                 >
+            <% if attribute.attribute == :name && show_action?(:show, resource) %>
+              <a href="<%= polymorphic_path([namespace, resource]) -%>" tabindex="-1">
                 <%= render_field attribute %>
               </a>
             <% else %>
@@ -57,15 +54,14 @@
           </td>
         <% end %>
 
-        <%= render(
-          "collection_item_actions",
-          collection_presenter: collection_presenter,
-          collection_field_name: collection_field_name,
-          page: page,
-          namespace: namespace,
-          resource: resource,
-          table_title: "page-title"
-        ) %>
+        <td class="row-buttons-2">
+          <%= link_to t("administrate.actions.edit"), [:edit, namespace, resource], class: "button is-info is-light", target: :_blank \
+                      if valid_action?(:edit, collection_presenter.resource_name) && show_action?(:edit, resource) %>
+          <%= link_to [namespace, resource], method: :delete, title: t("administrate.actions.delete"),
+                      data: { confirm: t("administrate.actions.confirm") }, class: "button is-danger is-light btn-icon-1" do %>
+            <span class="text-color-red fa fa-trash"></span>
+          <% end if valid_action?(:destroy, collection_presenter.resource_name) && show_action?(:destroy, resource) %>
+        </td>
       </tr>
     <% end %>
   </tbody>
