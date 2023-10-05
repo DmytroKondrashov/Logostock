@@ -18,4 +18,3 @@ class CsvValidator < ActiveModel::EachValidator
     record.errors.add attribute, "has different number of columns and headers"
   end
 end
-z
