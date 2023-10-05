@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_05_114925) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_05_115029) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -56,6 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_114925) do
     t.integer "logo_height"
     t.boolean "is_request", default: false
     t.bigint "client_id"
+    t.string "url"
     t.index ["name"], name: "index_companies_on_name", unique: true
   end
 
