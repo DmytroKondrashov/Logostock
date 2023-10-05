@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_05_114235) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_05_114418) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -40,6 +40,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_114235) do
     t.string "uid", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "token"
+    t.string "refresh_token"
+    t.integer "token_expires_at"
     t.index ["provider", "email"], name: "index_clients_on_provider_and_email", unique: true
     t.index ["provider", "uid"], name: "index_clients_on_provider_and_uid", unique: true
   end
