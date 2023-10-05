@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_05_114114) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_05_114235) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -45,12 +45,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_114114) do
   end
 
   create_table "companies", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "logotype"
     t.integer "logo_width"
     t.integer "logo_height"
+    t.index ["name"], name: "index_companies_on_name", unique: true
   end
 
   create_table "companies_job_functions", force: :cascade do |t|
