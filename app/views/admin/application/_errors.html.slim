@@ -1,0 +1,13 @@
+- resource = page.resource if defined?(page) && page.respond_to?(:resource)
+
+- if resource.errors.any?
+  .notification.is-danger.is-light
+    button.delete type="button"
+
+    - if resource.errors.many?
+      ul style="list-style-type: disc; padding-left: 11px;"
+        - resource.errors.full_messages.each do |message|
+          li
+            = message
+    - else
+      = resource.errors.full_messages.first
