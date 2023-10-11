@@ -1,0 +1,41 @@
+= render('admin/application/errors', resource: @search)
+= form_with scope: Admin::CompaniesController::FILTER_SCOPE, url: admin_companies_path, method: :get, \
+            html: { class: 'filters main-content__header', style: (company_filters_hidden? ? 'display: none' : nil) } do |f|
+
+  .columns
+    .column.is-half
+      fieldset.fieldset-1
+        legend Tags
+        .columns.is-flex-wrap-wrap
+          - Admin::CompaniesController::FILTER_ASSOCIATIONS.each_with_index do |model, index|
+            = tag.div class: ["column is-half"]
+              - input_name = [model.model_name.singular, "ids"].join("_")
+
+              .field
+                = f.label input_name, model.model_name.human.pluralize, class: :label
+                .control = f.collection_select input_name, model.select(:id, :name), :id, :name, \
+                                        { selected: value_for_filter_param_key(input_name), include_blank: true },\
+                                        { multiple: true, data: { plugin: :selectize } }
+  
+    .column.is-half
+      fieldset.fieldset-1.mb-5
+        legend Updated
+        .columns
+          - %i[from till].each do |attr|
+            .column
+              .field
+                = f.label attr, nil, class: :label
+                .control = f.date_field(attr, value: value_for_filter_param_key(attr), class: 'stylized_datepicker')
+
+      .filters__actions
+        = f.label :no_logo, class: "checkbox mr-3"
+          = f.check_box :no_logo, { checked: is_checkbox_checked?('no_logo'), class: :checkbox }, true, false
+          | No logo
+      
+        = f.label :undersized_logos, class: :checkbox
+          = f.check_box :undersized_logos, { checked: is_checkbox_checked?('undersized_logos'), class: :checkbox }, true, false
+          | Logo is undersized
+        
+        = f.hidden_field :search, id: "hidden-search-field"
+
+        = f.submit "Filter companies", name: nil, class: "button is-primary ml-auto"
