@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.2.2"
 
 gem "bootsnap", require: false
+gem 'carrierwave', '~> 3.0'
 gem "importmap-rails"
 gem "jbuilder"
 gem "pg", "~> 1.1"
@@ -16,6 +17,7 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "font-awesome-sass", "~> 6.4.2"
 
 gem "administrate", "~> 0.17.0"
+gem 'administrate-field-carrierwave', '~> 0.6.0'
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
