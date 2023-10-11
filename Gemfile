@@ -15,6 +15,7 @@ gem "stimulus-rails"
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "font-awesome-sass", "~> 6.4.2"
+gem "slim-rails", "~> 3.1", ">= 3.1.1"
 
 gem "administrate", "~> 0.17.0"
 gem 'administrate-field-carrierwave', '~> 0.6.0'
