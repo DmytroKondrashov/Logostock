@@ -2,12 +2,12 @@
 
 header.main-content__header role="banner"
   h1.main-content__page-title#page-title
-    = title (is_request ? "Requests for companies" : display_resource_name(page.resource_name))
+    / = title (is_request ? "Requests for companies" : display_resource_name(page.resource_name))
 
   = render "search", search_term: search_term, resource_name: display_resource_name(page.resource_name) if show_search_bar
 
   - unless is_request
-    button.button.is-dark.mr-5.filters-toggler type="button" #{company_filters_hidden? ? 'Show' : 'Hide'} filters
+    / button.button.is-dark.mr-5.filters-toggler type="button" #{company_filters_hidden? ? 'Show' : 'Hide'} filters
 
     div
       = link_to(t("administrate.actions.new_resource",
